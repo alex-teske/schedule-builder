@@ -5,9 +5,10 @@
 
 <h1><%= header %></h1>
 
-<% @potential_schedules.each do |potential| %>
-    <% @potential_schedule = potential %>
-    <p><%= render "weekly_schedule" %></p>
-    <p><%= render "course_statistics" %></p>
-
+<% @potential_schedules.each do |bucket| %>
+    <% potential = bucket.schedules.first %>
+        <% @potential_schedule = potential %>
+        <p><%= render "weekly_schedule" %></p>
+        <p><%= render "course_statistics" %></p>
+    <p><%= bucket.get_description %></p>
 <% end %>

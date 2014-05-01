@@ -11,5 +11,4 @@ class CourseSelection
     @activities[activity[:activity_name]].push(activity)
   end
 
-
 end
