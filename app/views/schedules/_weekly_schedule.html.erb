@@ -1,0 +1,36 @@
+<% days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %>
+
+
+<table style="width:0px">
+  <tr>
+    <td></td>
+    <% days.each do |day| %>
+        <td width = 24><%=day.first%></td>
+    <%end%>
+  </tr>
+  <% time = DateTime.new.change(:hour => 8, :minute => 0)  %>
+
+  <% until time.hour == 22 and time.minute == 30%>
+      <tr>
+        <td height="1"><%= time.strftime("%H:%M") %></td>
+
+        <% days.each do |day| %>
+            <% current_class = @potential_schedule.get_class_at_time(day, time.hour, time.minute) %>
+            <% class_id = current_class ? current_class.course_id : 0%>
+            <% cell_content = current_class ? current_class.activity_name[0..2].upcase : ""%>
+            <td class = "course_<%=class_id%>"><%=cell_content%></td>
+        <%end%>
+      </tr>
+      <% time += 30.minutes %>
+  <%end%>
+</table>
+&nbsp;
+<table style="width:0px">
+  <% courses = @potential_schedule.courses %>
+  <tr>
+  <% courses.each_with_index do |course, index| %>
+      <td width = 10 class = "course_<%=index+1%>"></td>
+      <td><%= course[:course_code] %></td>
+  <% end %>
+  </tr>
+</table>

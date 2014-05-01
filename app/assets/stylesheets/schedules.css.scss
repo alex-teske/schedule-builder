@@ -1,0 +1,81 @@
+// Place all the styles related to the Schedules controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body
+{
+}
+
+.course_missing
+{
+  color:red;
+}
+
+.course_found
+{
+  color:blue;
+}
+
+table
+{
+  border-collapse:collapse;
+}
+
+table, th, td
+{
+  border: 1px solid black;
+  font-size:0.8em;
+  font-weight:bold;
+  font-family:helvetica,sans-serif;
+  cellpadding:1;
+}
+
+td
+{
+  text-align:center;
+}
+
+.course_1
+{
+  background-color:red;
+}
+
+.course_2
+{
+  background-color:green;
+}
+
+.course_3
+{
+  background-color: #5095ff;
+}
+
+.course_4
+{
+  background-color:yellow;
+}
+
+.course_5
+{
+  background-color:purple
+}
+
+.course_6
+{
+  background-color:pink;
+}
+
+.course_7
+{
+  background-color:grey;
+}
+
+.course_8
+{
+  background-color:orange;
+}
+
+.course_9
+{
+  background-color:black;
+}

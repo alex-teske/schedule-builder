@@ -1,0 +1,29 @@
+<% flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, class: name %>
+<% end -%>
+
+<%= form_tag("/add_course", method: "post") do %>
+
+    <%= label_tag :course_code %>
+    <%= text_field_tag :course_code %>
+
+    <%= submit_tag("Add Course") %>
+<% end %>
+
+<% unless @schedule_cart.nil? %>
+    <h2>Courses in cart:</h2>
+    <% @schedule_cart.each do | x | %>
+        <p><%= x.to_s %></p>
+    <% end %>
+
+    <%= form_tag("/reset", method: "post") do %>
+        <%= submit_tag 'Reset', :name => 'reset' %>
+    <% end %>
+
+    <%= form_tag("/preview", method: "post") do %>
+        <%= select_tag(:semester, options_for_select([['Winter 2014', 20141], ['Summer 2014', 20145]])) %>
+        <%= submit_tag 'Generate Schedule', :name => 'generate' %>
+    <% end %>
+<% end %>
+
+

@@ -1,0 +1,13 @@
+
+<% header = "I generated #{@potential_schedules.size} schedules!" %>
+<% header = "No schedules could be generated with that course load :(" if @potential_schedules.size == 0 %>
+<% header = "I could only generate one schedule with those courses... I hope you like it!" if @potential_schedules.size == 1 %>
+
+<h1><%= header %></h1>
+
+<% @potential_schedules.each do |potential| %>
+    <% @potential_schedule = potential %>
+    <p><%= render "weekly_schedule" %></p>
+    <p><%= render "course_statistics" %></p>
+
+<% end %>
