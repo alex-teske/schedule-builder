@@ -9,7 +9,7 @@ class SchedulesController < ApplicationController
       flash[:error] = "Invalid course code"
     elsif session[:cart].include? course_code
       flash[:error] = "This course is already included"
-    elsif session[:cart].length > 9
+    elsif session[:cart].length >= 9
       flash[:error] = "No more than 9 courses are allowed"
     else
       session[:cart].push(course_code)
