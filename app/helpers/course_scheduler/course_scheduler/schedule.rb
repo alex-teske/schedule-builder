@@ -23,6 +23,32 @@ class Schedule
     @valid
   end
 
+  def ==(other)
+    my_activities = @activities.dup
+    other_activities = other.activities.dup
+
+    my_comparison = Array.new
+    other_comparison = Array.new
+
+
+    return false if my_activities.length != other_activities.length
+
+    comparison_criterion = [:start_time, :end_time, :day, :activity_name, :course_id]
+    for i in 0..my_activities.length-1
+      my_activity = Hash.new
+      other_activity = Hash.new
+
+      comparison_criterion.each do |criteria|
+        my_activity[criteria] = my_activities[i].send(criteria)
+        other_activity[criteria] = other_activities[i].send(criteria)
+      end
+      my_comparison.push(my_activity)
+      other_comparison.push(other_activity)
+    end
+
+    my_comparison == other_comparison
+  end
+
   def get_class_at_time(day, hour, minute)
     time = DateTime.now.change({:hour => hour, :min => minute})
     requested_activity = nil
@@ -40,14 +66,15 @@ private
 
   def add_course course
     @courses.push({:course_title => course.course_title, :course_code => course.course_code, :group => course.group})
+    @courses.last[:activity_groups] = Array.new
 
     course.activities.each do |activity_type|
       activity_type[1].each do |act|
         activity = Activity.new
         activity.set_info(@courses.count, act)
         @activities.push(activity)
+        @courses.last[:activity_groups].push([act[:activity_name], act[:activity_num]]) unless act[:activity_name].to_s == "Lecture"
       end
-
     end
   end
 

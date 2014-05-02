@@ -1,5 +1,6 @@
 require_relative 'course_scheduler/course_template'
 require_relative 'course_scheduler/schedule'
+require_relative 'course_scheduler/schedule_bucket'
 
 
 module CourseScheduler
@@ -21,10 +22,8 @@ module CourseScheduler
 
     all_schedules = generate_all_schedules
     valid_schedules = remove_invalid_schedules(all_schedules)
+    bucketize_schedules(valid_schedules)
 
-    puts valid_schedules.size.to_s
-
-    valid_schedules
   end
 
 private
@@ -74,5 +73,30 @@ private
     end
 
     valid_schedules
+  end
+
+  def self.bucketize_schedules(schedules)
+
+    buckets = Array.new
+
+    schedules.each do |schedule|
+      found_bucket = false
+      buckets.each do |bucket|
+        if bucket.belongs_to?(schedule)
+          bucket.schedules.push(schedule)
+          found_bucket = true
+        end
+      end
+
+      unless found_bucket
+        bucket = ScheduleBucket.new
+        bucket.schedules.push(schedule)
+        buckets.push(bucket)
+      end
+
+    end
+
+    buckets
+
   end
 end
