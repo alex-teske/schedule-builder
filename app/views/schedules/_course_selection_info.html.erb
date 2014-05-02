@@ -1,0 +1,19 @@
+<OL>
+<% @bucket.get_description.each do |course, info| %>
+  <LI><%=course%></LI>
+  <% info.each do |group| %>
+      <UL>
+      <% activity_choices = "" %>
+      <% unless group[1].empty? %>
+        <% activity_choices = " with " %>
+        <% group[1].each do |activity, groups| %>
+            <%activity_choices += "#{activity} #{groups.join(" or ")}" %>
+            <%activity_choices += ", " unless activity == group[1].keys.last %>
+        <% end %>
+      <% end %>
+      <LI>Section <%=group[0] + activity_choices%></LI>
+      </UL>
+  <% end %>
+
+<% end %>
+</OL>
