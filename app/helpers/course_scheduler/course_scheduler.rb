@@ -1,6 +1,7 @@
 require_relative 'course_scheduler/course_template'
 require_relative 'course_scheduler/schedule'
 require_relative 'course_scheduler/schedule_bucket'
+require_relative 'course_scheduler/schedule_ranker'
 
 
 module CourseScheduler
@@ -22,7 +23,8 @@ module CourseScheduler
 
     all_schedules = generate_all_schedules
     valid_schedules = remove_invalid_schedules(all_schedules)
-    bucketize_schedules(valid_schedules)
+    bucketized_schedules = bucketize_schedules(valid_schedules)
+    ScheduleRanker.rank_schedules(bucketized_schedules)
 
   end
 
