@@ -40,3 +40,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'nokogiri'
 gem 'activerecord-session_store'
+gem 'bootstrap-sass', '2.3.2.0'
+gem 'sprockets', '2.11.0'

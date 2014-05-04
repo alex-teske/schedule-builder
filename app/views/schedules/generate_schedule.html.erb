@@ -9,7 +9,11 @@
     <% potential = bucket.schedules.first %>
     <% @bucket = bucket %>
         <% @potential_schedule = potential %>
-        <p><%= render "weekly_schedule" %></p>
-        <p><%= render "course_statistics" %></p>
-        <p><%= render "course_selection_info" %></p>
+        <div class="well">
+            <table>
+            <p><%= render "weekly_schedule" %></p>
+            <p><%= render "course_statistics" %></p>
+            <p><%= render "course_selection_info" %></p>
+            </table>
+        </div>
 <% end %>

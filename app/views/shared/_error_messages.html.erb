@@ -1,12 +1,8 @@
-<% if object.errors.any? %>
-    <div id="error_explanation">
+<% if flash.any? %>
       <div class="alert alert-error">
-        The form contains <%= pluralize(object.errors.count, "error") %>.
+        <button type="button" class="close" data-dismiss="alert" href="#">&times;</button>
+        <% flash.each do |name, msg| -%>
+            <%= content_tag :div, msg, class: name %>
+        <% end -%>
       </div>
-      <ul>
-        <% object.errors.full_messages.each do |msg| %>
-            <li> <%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
 <% end %>

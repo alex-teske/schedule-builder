@@ -2,32 +2,41 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body
-{
-}
-
 .course_missing
 {
   color:red;
 }
 
+
+.text-info
+{
+  text-align:left;
+  color:black
+}
 .course_found
 {
   color:blue;
 }
 
-table
+.schedule-table
 {
   border-collapse:collapse;
 }
 
-table, th, td
+.schedule-table
 {
-  border: 1px solid black;
-  font-size:0.8em;
-  font-weight:bold;
-  font-family:helvetica,sans-serif;
-  cellpadding:1;
+  th, td, tr {
+    width: 24px;
+    height: 5px;
+    border: 1px solid black;
+    font-size: 0.85em;
+    font-weight: bold;
+    font-family: helvetica, sans-serif;
+    cellpadding: 0;
+    vertical-align: top; /* add vertical align top to fix this issue */
+    padding: 0px;
+    line-height:120%
+  }
 }
 
 td
