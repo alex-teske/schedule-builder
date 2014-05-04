@@ -2,12 +2,11 @@ require_relative "Activity"
 
 class Schedule
 
-  attr_reader :courses, :activities, :statistics
+  attr_reader :courses, :activities
 
   def initialize (courses = [])
     @courses = Array.new
     @activities = Array.new
-    @statistics = Hash.new
     set_courses(courses) unless courses.empty?
   end
 
@@ -16,7 +15,7 @@ class Schedule
     courses.each do |course|
       add_course(course)
     end
-    initialize_courses
+    determine_validity
   end
 
   def valid?
@@ -78,10 +77,6 @@ private
     end
   end
 
-  def initialize_courses
-    determine_validity
-    calculate_statistics if @valid
-  end
 
   def determine_validity
     @valid = true
@@ -91,23 +86,6 @@ private
         @valid = false if @activities[i].overlaps_with?(@activities[j])
       end
     end
-  end
-
-  def calculate_statistics
-    days_of_class = {}
-    @activities.each do |activity|
-      days_of_class[activity.day] ||= 0
-      days_of_class[activity.day] += activity.length
-    end
-
-    hours_of_class = 0
-
-    days_of_class.values.each do |x|
-      hours_of_class += x
-    end
-
-    @statistics["Days of class"] = days_of_class.keys.length
-    @statistics["Hours of class"] = hours_of_class
   end
 
 end
