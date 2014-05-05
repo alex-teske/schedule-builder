@@ -1,8 +1,11 @@
+<% at_least_one_course = false %>
+
 <% @course_codes.each do |code| %>
     <% course_info = @course_info[code] %>
 
     <% course_message = course_info.nil? ? "Course not found for this semester" : course_info[code][:title] %>
     <% div_class = course_info.nil? ? "course_missing" : "course_found" %>
+    <% at_least_one_course = true if div_class == "course_found" %>
 
     <div class = <%= div_class %> >
     <p><%= code + " " + course_message %></p>
@@ -12,6 +15,9 @@
 <%= form_tag("/show_cart", method: "post") do %>
     <%= submit_tag 'Back', :name => 'back' %>
 <% end %>
-<%= form_tag("/confirmation", method: "post") do %>
-    <%= submit_tag 'Confirm', :name => 'confirm' %>
+
+<% if at_least_one_course %>
+    <%= form_tag("/confirmation", method: "post") do %>
+        <%= submit_tag 'Confirm', :name => 'confirm' %>
+    <% end %>
 <% end %>

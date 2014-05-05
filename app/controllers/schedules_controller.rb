@@ -3,7 +3,7 @@ class SchedulesController < ApplicationController
   def add_course()
 
     session[:cart] ||= Array.new
-    course_code = params[:course_code]
+    course_code = params[:course_code].upcase
 
     if not valid_course_code?(course_code)
       flash[:error] = "Invalid course code"
