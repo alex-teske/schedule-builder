@@ -1,4 +1,4 @@
-require_relative "Activity"
+require_relative "activity"
 
 class Schedule
 
