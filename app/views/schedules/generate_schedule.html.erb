@@ -4,6 +4,7 @@
 <% header = "I could only generate one schedule with those courses... I hope you like it!" if @potential_schedules.size == 1 %>
 
 <h1><%= header %></h1>
+<% if @potential_schedules.size > 1 %><h3>I also sorted them by how awesome they are :)</h3><%end%>
 
 <% @potential_schedules.each do |bucket| %>
     <% potential = bucket.schedules.first %>
